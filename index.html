@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Nucleul și Ribozomii - Biogenius Academy</title>
+    <style>
+        :root {
+            --primary-color: #00e6c0;
+            --secondary-color: #00b3a1;
+            --background-color: #021726;
+            --dark-color: #01111b;
+            --text-color: #ffffff;
+            --sidebar-width: 250px;
+            --header-height: 60px;
+            --card-background: rgba(0, 230, 192, 0.1);
+            --card-border: rgba(0, 230, 192, 0.3);
+            --orange-neon: #FF9500;
+            --orange-dark: #FF5E3A;
+            --yellow-neon: #FFD60A;
+            --yellow-dark: #FFC107;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            min-height: 100vh;
+            position: relative;
+            transition: margin-left 0.4s ease;
+        }
+
+        /* Header Styles */
+        header {
+            height: var(--header-height);
+            background-color: var(--dark-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 10;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo h1 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .logo svg {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            margin-top: var(--header-height);
+            padding: 20px;
+            transition: margin-left 0.4s ease;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+            overflow-x: hidden;
+        }
+
+        .page-title {
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 10px;
+            text-align: center;
+            color: var(--primary-color);
+            margin-top: 30px;
+            font-size: 2.2rem;
+        }
+
+        .page-title::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+
+        .content-section {
+            background-color: var(--card-background);
+            border-radius: 10px;
+            border: 1px solid var(--card-border);
+            padding: 30px;
+            margin-bottom: 30px;
+            width: 100%;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .content-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        .content-section p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+            text-align: justify;
+        }
+
+        .right-align {
+            padding-left: 25px;
+            display: block;
+        }
+
+        .titlu-2 {
+            padding-left: 10px;
+            font-size: 1.6rem;
+            color: var(--primary-color);
+            margin: 30px 0 20px 0;
+        }
+
+        /* Toggle Content Styles */
+        .title-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(0, 230, 192, 0.2);
+            padding: 10px 20px;
+            border-radius: 10px 10px 0 0;
+            border: 1px solid var(--card-border);
+            margin-top: 30px;
+        }
+
+        .title {
+            margin: 0;
+            font-size: 1.4rem;
+            color: var(--primary-color);
+            text-align: center;
+            width: 100%;
+        }
+
+        .toggle-btn {
+            background-color: var(--primary-color);
+            color: var(--dark-color);
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            line-height: 1;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-btn:hover {
+            background-color: var(--secondary-color);
+            transform: scale(1.1);
+        }
+
+        .content-box {
+            border: 1px solid var(--card-border);
+            border-top: none;
+            padding: 20px;
+            border-radius: 0 0 10px 10px;
+            background-color: rgba(0, 230, 192, 0.05);
+        }
+
+        .image-placeholder {
+            width: 100%;
+            max-width: 600px;
+            height: 400px;
+            background-color: rgba(0, 230, 192, 0.1);
+            border: 1px dashed var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px auto;
+            border-radius: 10px;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .poza {
+            padding: 25px 0;
+            text-align: center;
+        }
+
+        .poza-2 {
+            padding: 15px 0;
+            text-align: center;
+        }
+
+        .home-button {
+            position: fixed;
+            top: 80px;
+            left: 20px;
+            background-color: var(--primary-color);
+            color: var(--dark-color);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            z-index: 9;
+            transition: all 0.3s ease;
+        }
+
+        .home-button:hover {
+            transform: scale(1.1);
+            background-color: var(--secondary-color);
+        }
+
+        .home-icon {
+            width: 24px;
+            height: 24px;
+            fill: var(--dark-color);
+        }
+
+        /* Brain Decoration */
+        .brain-decoration {
+            position: fixed;
+            bottom: -100px;
+            right: -100px;
+            width: 300px;
+            height: 300px;
+            opacity: 0.1;
+            z-index: -1;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2300e6c0'%3E%3Cpath d='M12 2c1.9 0 3.6.8 4.8 2 1.2 1.2 2 2.9 2 4.8 0 3.2-2.2 5.8-5.2 6.6v.6c0 1.1-.9 2-2 2h-.4c-1.1 0-2-.9-2-2v-.6C6.2 14.6 4 12 4 8.8c0-1.9.8-3.6 2-4.8C7.4 2.8 9.1 2 11 2h1zm0 2c-1.3 0-2.5.5-3.4 1.4-.9.9-1.4 2.1-1.4 3.4 0 2.2 1.5 4.1 3.6 4.7.2.1.4.3.4.5v1c0 .6.4 1 1 1h.8c.6 0 1-.4 1-1v-1c0-.2.2-.4.4-.5 2.1-.6 3.6-2.5 3.6-4.7 0-1.3-.5-2.5-1.4-3.4-.9-.9-2.1-1.4-3.4-1.4h-1z'/%3E%3C/svg%3E");
+            background-size: cover;
+            background-repeat: no-repeat;
+            transform: rotate(45deg);
+        }
+
+        /* Responsiveness */
+        @media (max-width: 768px) {
+            body, html {
+                overflow-x: hidden;
+                width: 100%;
+                position: relative;
+            }
+            
+            .container {
+                width: 100%;
+                overflow-x: hidden;
+            }
+            
+            .content-section {
+                padding: 20px 15px;
+            }
+            
+            .page-title {
+                font-size: 1.8rem;
+            }
+            
+            .home-button {
+                width: 40px;
+                height: 40px;
+                top: 70px;
+                left: 10px;
+            }
+            
+            .home-icon {
+                width: 20px;
+                height: 20px;
+            }
+            
+            .titlu-2 {
+                font-size: 1.4rem;
+                padding-left: 5px;
+            }
+            
+            .right-align {
+                padding-left: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .content-section {
+                padding: 15px 10px;
+            }
+
+            .logo h1 {
+                font-size: 0.9rem;
+            }
+            
+            .main-content {
+                padding: 15px 10px;
+            }
+            
+            .page-title {
+                font-size: 1.5rem;
+                margin-top: 20px;
+            }
+            
+            .right-align {
+                padding-left: 10px;
+            }
+            
+            .title-container {
+                padding: 8px 15px;
+            }
+            
+            .title {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* Header pentru versiunea mobilă */
+        @media (max-width: 360px) {
+            header {
+                height: 50px;
+                padding: 0 10px;
+            }
+            
+            .logo h1 {
+                font-size: 0.9rem;
+                padding-left: 35px; /* Redus spațiul pentru iconița home */
+                white-space: nowrap;
+            }
+            
+            .logo svg {
+                width: 25px;
+                height: 25px;
+            }
+            
+            .home-button {
+                width: 26px;
+                height: 26px;
+                padding: 5px;
+            }
+            
+            .home-button i {
+                font-size: 0.7rem;
+            }
+            
+            .main-content {
+                margin-top: 60px;
+                padding: 8px;
+            }
+            
+            .content-section {
+                padding: 12px;
+            }
+            
+            .page-title {
+                font-size: 1.4rem;
+            }
+            
+            .section-title {
+                font-size: 1.2rem;
+            }
+            
+            p, li {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="brain-decoration"></div>
+    
+    <!-- Header -->
+    <header>
+        <div style="width: 30px;"></div> <!-- Spațiu gol pentru echilibru -->
+        <div class="logo">
+            <svg width="40" height="40" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="45" fill="none" stroke="#00e6c0" stroke-width="2" />
+                <path d="M30,50 Q40,30 50,50 Q60,70 70,50" fill="none" stroke="#00e6c0" stroke-width="2" />
+                <path d="M30,40 Q50,20 70,40" fill="none" stroke="#00e6c0" stroke-width="2" />
+                <path d="M30,60 Q50,80 70,60" fill="none" stroke="#00e6c0" stroke-width="2" />
+                <path d="M45,35 Q50,30 55,35" fill="none" stroke="#00e6c0" stroke-width="2" />
+                <path d="M45,65 Q50,70 55,65" fill="none" stroke="#00e6c0" stroke-width="2" />
+            </svg>
+            <h1>BIOGENIUS ACADEMY</h1>
+        </div>
+        <div style="width: 30px;"></div> <!-- Spațiu gol pentru echilibru -->
+    </header>
+
+    <!-- Back Button -->
+    <a href="index.html#sectiunea_dorita" class="home-button">
+        <svg class="home-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+        </svg>
+    </a>
+
+    <!-- Main Content -->
+    <div class="container" id="container">
+        <div class="main-content">
+            <h1 class="page-title">Nucleul și Ribozomii</h1>
+            
+            <div class="content-section">
+                <h2 class="subtitlu">Nucleul:</h2>
+                <p>Nucleul (plural: nuclei) este organitul central din celulele eucariote, jucând un rol esențial în păstrarea informației genetice și coordonarea proceselor celulare.</p>
+                
+                <div class="titlu-2"><b>Structura nucleului:</b></div>
+                <p><b>1) Membrana nucleară:</b></p>
+                <p>- Nucleul este înconjurat de o membrană dublă, numită membrană nucleară, formată din două straturi – unul intern și unul extern – separate de un spațiu perinuclear. Membrana internă se sprijină pe o rețea fibrosă numită lamina nucleară, alcătuită din proteine intermediare. Această structură nu doar oferă stabilitate mecanică, ci și ajută la menținerea organizării cromatinei (complexul ADN-proteină).</p>
+                <p>- Spațiul perinuclear: Între membrana internă și cea externă se află un spațiu subțire, numit spațiul perinuclear, care este conectat direct la reticulul endoplasmatic. Această legătură facilitează schimbul rapid de materiale, cum ar fi proteinele și lipidele, între nucleu și alte compartimente celulare.</p>
+                
+                <div class="poza">
+                    <div class="image-placeholder">Imagine membrană nucleară</div>
+                </div>
+                
+                <p><b>2) Porii nucleari:</b></p>
+                <p>- În membrana nucleară se găsesc structuri specializate denumite pori nucleari, care asigură un schimb controlat de molecule între nucleu și citoplasmă. Aceste pori permit intrarea și ieșirea selectivă a proteinelor, ARN-urilor și altor factori esențiali, facilitând procese precum transcripția și reglarea expresiei genice.</p>
+                
+                <div class="poza">
+                    <div class="image-placeholder">Imagine pori nucleari</div>
+                </div>
+                
+                <p><b>3) Nucleoplasma:</b></p>
+                <p>- Interiorul nucleului conține nucleoplasma, un mediu gelatinos similar citosolului, care găzduiește:</p>
+                <p>• Cromatina: ADN-ul asociat cu proteinele histonice, organizat sub formă de fibre ce se compresiează în diferite grade, facilitând astfel gestionarea și reglementarea informației genetice.</p>
+                <p>• Nucleolul: În imagini microscopice, nucleul poate prezenta o zonă întunecată, numită nucleol. Această regiune este esențială pentru formarea ribozomilor, unde se sintetizează ARN-ul ribozomal și se asamblează componentele ribozomale.</p>
+                
+                <div class="poza">
+                    <div class="image-placeholder">Imagine nucleoplasmă</div>
+                </div>
+                
+                <div class="titlu-2"><b>Funcțiile nucleului:</b></div>
+                <p>Iată principalele funcții ale nucleului celulei eucariote, explicate detaliat:</p>
+                <p><b>1) Depozitarea și protejarea ADN-ului:</b></p>
+                <p>- Nucleul adăpostește materialul genetic (ADN-ul), asigurându-se că informația esențială pentru funcționarea și reproducerea celulei este păstrată în siguranță. Protecția oferită de învelișul nuclear previne deteriorarea ADN-ului și facilitează repararea eventualelor erori.</p>
+                <p><b>2) Reglarea expresiei genice:</b></p>
+                <p>- În nucleu se produce transcripția, procesul prin care informația din ADN este copiată în ARN mesager, care ulterior va fi tradus în proteine. Această etapă esențială permite celulei să controleze care gene sunt active și când, determinând astfel sinteza proteică specifică necesară adaptării la diverse condiții.</p>
+                <p><b>3) Formarea ribozomilor:</b></p>
+                <p>- Nucleolul, o regiune distinctă din interiorul nucleului, este locul de asamblare al ribozomilor. Aici se sintetizează ARN-ul ribozomal și se combină cu proteinele ribozomale pentru a forma subunitățile ribozomice, care vor fi ulterior transportate în citoplasmă pentru sinteza proteinelor.</p>
+                <p><b>4) Replicarea ADN-ului:</b></p>
+                <p>- În timpul ciclului celular, înainte de diviziune, ADN-ul din nucleu este replicat cu precizie. Aceasta asigură că fiecare celulă fiică primește o copie completă a materialului genetic, element esențial pentru menținerea continuității și integrității informației genetice.</p>
+                <p><b>5) Coordonarea activităților celulare:</b></p>
+                <p>- Nucleul este centrul de control al celulei, unde se reglează nu doar sinteza de proteine, ci și diverse procese esențiale, cum ar fi ciclul celular și răspunsurile la semnalele din mediul înconjurător. Factorii de transcripție și alte molecule reglementatoare, prezente în nucleu, orchestrază aceste procese pentru a reflecta nevoile celulei.</p>
+                <p><b>6) Controlul traficului molecular:</b></p>
+                <p>- Porii nucleari, structuri specializate din învelișul nuclear, gestionează intrarea și ieșirea moleculelor între nucleu și citoplasmă. Prin acest mecanism, nucleul poate selectiv să permită accesul anumitor proteine și ARN-uri, menținând astfel un mediu intern controlat și adaptat funcțiilor specifice.</p>
+                <p>Aceste funcții combinate fac din nucleu un organit indispensabil pentru viață, asigurând nu doar stocarea și transmiterea informației genetice, ci și reglarea dinamică a proceselor vitale din celulă.</p>
+            </div>
+            
+            <div class="content-section">
+                <h2 class="subtitlu">Ribozomii:</h2>
+                <p>Ribozomii sunt organite esențiale ale celulei, specializate în sinteza proteinelor. Ei funcționează ca niște „fabrici de proteine".</p>
+                <p>Ribozomii sunt alcătuiți din ARN și proteine, format din două subunități ARN-proteină: una mică și una mare. În structura lor, subunitatea mare se așază deasupra celei mici, lăsând un șablon de ARN între ele.</p>
+                
+                <div class="poza">
+                    <div class="image-placeholder">Imagine structură ribozomi</div>
+                </div>
+                
+                <p>La celulele eucariote, nucleul joacă un rol esențial în orchestrarea sintezei proteinelor. În interiorul nucleului, fragmentele de ADN, cunoscute sub numele de gene, sunt transcrise pentru a forma ARN mesager (ARNm). Ulterior, ARNm-ul, care conţine codul necesar, părăseşte nucleul și se deplasează către ribozomi. Acolo, ribozomii citesc aceste instrucţiuni și asamblează o proteină cu o secvență specifică de aminoacizi, într-un proces numit translaţie.</p>
+                <p>Spre deosebire de eucariote, celulele procariote nu au nucleu. Astfel, genele sunt transcrise direct în citoplasmă, iar ARNm-urile rezultate pot fi imediat traduse în proteine de către ribozomi.</p>
+                <p>Ribozomii eucariotelor pot să fie liberi, adică plutesc prin citoplasmă, sau legați, adică atașați de reticulul endoplasmatic sau de exteriorul învelișului nuclear.</p>
+                <p>Deoarece sinteza proteinelor este esențială pentru funcționarea tuturor celulelor, ribozomii se găsesc în aproape fiecare celulă a organismelor pluricelulare, precum și în celulele procariote, cum ar fi bacteriile. Totuși, celulele eucariote specializate în producția intensă de proteine au adesea un număr mai mare de ribozomi. De exemplu, celulele din pancreas, responsabile pentru producerea și secreția enzimelor digestive, dispun de o abundență notabilă de ribozomi pentru a susține sinteza rapidă a acestor enzime.</p>
+                
+                <div class="title-container">
+                    <h2 class="title">O ultimă idee</h2>
+                    <button class="toggle-btn">+</button>
+                </div>
+                <div class="content-box" style="display: none;">
+                    <p>Pentru a evidenția importanța fundamentală a ribozomilor, se remarcă realizarea de excepție din 2009, când Premiul Nobel pentru Chimie a fost acordat unui trio de cercetători care au reușit să dezvăluie structura și mișcările ribozomilor la nivel atomic. Folosind tehnica sofisticată a cristalografiei cu raze X, acești oameni de știință au putut cartografia cu o precizie extraordinară nu doar aranjamentul static al componentelor ribozomilor, ci și dinamica mișcărilor care le permit să asambleze proteinele.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Selectează toate butoanele de expandare
+            const toggleBtns = document.querySelectorAll('.toggle-btn');
+            
+            // Adaugă un event listener pentru fiecare buton
+            toggleBtns.forEach(function(btn, index) {
+                // Dă fiecărui set de elemente un ID unic
+                const contentId = 'content-box-' + index;
+                
+                // Obține caseta de conținut corespunzătoare
+                const contentBox = btn.closest('.title-container').nextElementSibling;
+                
+                // Adaugă ID la caseta de conținut
+                contentBox.id = contentId;
+                
+                // Activate the first content box by default (open it automatically)
+                if (index === 0) {
+                    contentBox.style.display = 'block';
+                    btn.textContent = '−';
+                }
+                
+                // Adaugă evenimentul de click
+                btn.addEventListener('click', function() {
+                    const targetBox = document.getElementById(contentId);
+                    
+                    if (targetBox.style.display === 'none') {
+                        targetBox.style.display = 'block';
+                        btn.textContent = '−';
+                    } else {
+                        targetBox.style.display = 'none';
+                        btn.textContent = '+';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
